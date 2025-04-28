@@ -15,7 +15,7 @@ import lab02.notifications.EMail;
 
 public class Lab02Test {
 
-    
+    // Testa a interface Notificavel na classe Cliente
     @Test
     public void enviarNotificacao() {
         Cliente cliente = new Cliente("João", "joao@example.com");
@@ -23,7 +23,8 @@ public class Lab02Test {
         cliente.adicionarNotificacao(email);
         cliente.enviarNotificacao("Seu ingresso para o Festival de Música foi confirmado!");
     }
-
+    
+    // Testa a interface Comparable na classa Cliente
     @Test
     public void comparaClientes() {
         Cliente cliente1 = new Cliente("João", "joao@example.com");
@@ -43,6 +44,7 @@ public class Lab02Test {
         cliente1.compareTo(cliente3);
     }
 
+    // Testa as classes EventoEmBar e EventoMusicaAoVivo
     @Test
     public void eventosCaracteristicas() {
         EventoEmBar eventoEmBar = new EventoEmBar("Bar 01", "18h", "2h");
@@ -51,6 +53,8 @@ public class Lab02Test {
         eventoMusicaAoVivo.descricao();
     }
 
+
+    //Tenta vender ingresso após o sold out e cancelar um ingresso inexistente
     @Test
     public void trataErros(){
         Local local = new Local("Casa do Rock", 1000);
