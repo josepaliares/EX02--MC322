@@ -16,8 +16,8 @@ public class EventoJogo extends Evento {
     * @param local o local do Evento
     * @param precoIngresso o preço do Ingresso do Evento
     */
-    public EventoJogo(String nome, Local local, double precoIngresso, Organizadora organizadora, String data, List<String> times) {
-        super(nome, local, precoIngresso, organizadora, data);
+    public EventoJogo(String nome, Local local, double precoIngresso, Organizadora organizadora, String data, int capacidade, List<String> times) {
+        super(nome, local, precoIngresso, organizadora, data, capacidade);
         this.times = times;
     }
 

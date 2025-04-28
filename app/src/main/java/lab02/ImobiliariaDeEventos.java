@@ -4,6 +4,7 @@
 
 package lab02;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ImobiliariaDeEventos {
@@ -18,8 +19,27 @@ public class ImobiliariaDeEventos {
      */
     public ImobiliariaDeEventos(String nome) {
         this.nome = nome;
+        this.locais = new ArrayList<>();
     }
 
+    /**
+     * Retorna o nome da imobiliária de eventos
+     * @return o nome da imobiliária de eventos
+     */
+    public String getNome() {
+        return nome;
+    }
+    /**
+     * Altera o nome da imobiliária de eventos para `nome` 
+     * @param nome o novo nome da imobiliária de eventos
+     */
+    public void setNome(String nome) {
+        if (nome == null || nome.isEmpty()) {
+            throw new IllegalArgumentException("Nome não pode ser nulo ou vazio.");
+        }
+        this.nome = nome;
+    }
+    
     /**
      * Adiciona um local à lista de locais disponíveis
      * @param local o local a ser adicionado

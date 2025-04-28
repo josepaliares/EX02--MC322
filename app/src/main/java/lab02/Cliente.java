@@ -9,6 +9,9 @@ package lab02;
 import java.util.ArrayList;
 import java.util.List;
 
+import lab02.exceptions.IngressoNaoEncontradoException;
+import lab02.exceptions.CancelamentoNaoPermitidoException;
+
 public class Cliente {
 
     private String nome;
@@ -39,6 +42,9 @@ public class Cliente {
      * @param nome o novo nome do cliente
      */
     public void setNome(String nome){
+        if (nome == null || nome.isEmpty()) {
+            throw new IllegalArgumentException("Nome não pode ser nulo ou vazio.");
+        }
         this.nome = nome;
     }
 
@@ -55,6 +61,9 @@ public class Cliente {
      * @param email o novo email do cliente
      */
     public void setEmail(String email){
+        if (email == null || email.isEmpty()) {
+            throw new IllegalArgumentException("Email não pode ser nulo ou vazio.");
+        }
         this.email = email;
     }
 
@@ -85,5 +94,23 @@ public class Cliente {
      */
     public void removerIngresso(Ingresso ingresso){
         ingressos.remove(ingresso);
+    }
+    /**
+     * Cancela um ingresso da lista de ingressos do cliente
+     * @param evento o evento do ingresso a ser removido
+     */
+    public void cancelarIngresso(Evento evento) throws IngressoNaoEncontradoException, CancelamentoNaoPermitidoException {
+        if (evento.ingressosRestantes == 0){ // Não são permitidos cancelamentos após o sold out
+            throw new CancelamentoNaoPermitidoException("Cancelamento não permitido.");
+        }
+        for (Ingresso ingresso : ingressos) {
+            if (ingresso.getEvento().equals(evento)) {
+                this.removerIngresso(ingresso);
+                break;
+            }
+        }
+
+        throw new IngressoNaoEncontradoException("Ingresso não encontrado.");
+
     }
 }

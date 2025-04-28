@@ -32,12 +32,22 @@ public class Ingresso {
 
         return this.preco;
     }
+    /**
+     * Retorna o evento associado ao Ingresso
+     * @return o evento associado ao Ingresso
+     */
+    public Evento getEvento() {
+        return evento;
+    }
 
     /**
      * Define o evento associado ao Ingresso
      * @param evento o evento associado ao Ingresso
      */
     public void setEvento(Evento evento) {
+        if (evento == null) {
+            throw new IllegalArgumentException("Evento não pode ser nulo.");
+        }
         this.evento = evento;
     }
 }

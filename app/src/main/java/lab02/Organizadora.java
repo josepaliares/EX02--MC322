@@ -20,7 +20,30 @@ public class Organizadora {
         this.endereco = endereco;
     }
 
-    
+    /**
+     * Retorna o nome da organizadora
+     * @return o nome da organizadora
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * Retorna o CNPJ da organizadora
+     * @return o CNPJ da organizadora
+     */
+    public int getCnpj() {
+        return cnpj;
+    }
+
+    /**
+     * Retorna o endereço da organizadora
+     * @return o endereço da organizadora
+     */
+    public String getEndereco() {
+        return endereco;
+    }
+
     /**
      * Cria um evento do tipo EventoFestival
      * @param nome o nome do evento
@@ -31,8 +54,8 @@ public class Organizadora {
      * @param duracao a duração do evento em horas
      * @return um evento do tipo EventoFestival
      */
-    public EventoFestival criarEvento(String nome, Local local, double precoIngresso, String data, List<String> lineup, int duracao) {
-        return new EventoFestival(nome, local, precoIngresso, this, data, lineup, duracao);
+    public EventoFestival criarEvento(String nome, Local local, double precoIngresso, String data, List<String> lineup, int duracao, int capacidade) {
+        return new EventoFestival(nome, local, precoIngresso, this, data, capacidade, lineup, duracao);
     }
     /**
      * Cria um evento do tipo EventoJogo
@@ -43,8 +66,8 @@ public class Organizadora {
      * @param times a lista de times que se enfrentarão no evento
      * @return um evento do tipo EventoJogo
      */
-    public EventoJogo criarEvento(String nome, Local local, double precoIngresso, String data, List<String> times) {
-        return new EventoJogo(nome, local, precoIngresso, this, data, times);
+    public EventoJogo criarEvento(String nome, Local local, double precoIngresso, String data, List<String> times, int capacidade) {
+        return new EventoJogo(nome, local, precoIngresso, this, data, capacidade, times);
     }
     /**
      * Cria um evento do tipo EventoShow
@@ -55,7 +78,7 @@ public class Organizadora {
      * @param artista o artista que se apresentará no evento
      * @return um evento do tipo EventoShow
      */
-    public EventoShow criarEvento(String nome, Local local, double precoIngresso, String data, String artista) {
-        return new EventoShow(nome, local, precoIngresso, this, data, artista);
+    public EventoShow criarEvento(String nome, Local local, double precoIngresso, String data, String artista, int capacidade) {
+        return new EventoShow(nome, local, precoIngresso, this, data, capacidade, artista);
     }
 }

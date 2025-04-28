@@ -4,6 +4,7 @@
 
 package lab02;
 
+import lab02.exceptions.IngressoEsgotadoException;
 
 public abstract class Evento {
     protected String nome;
@@ -11,19 +12,23 @@ public abstract class Evento {
     protected double precoIngresso; // preço base do ingresso
     protected Organizadora organizadora;
     protected String data;
+    protected int capacidade;
+    protected int ingressosRestantes;
 
     /**
      * Construtor da classe Evento
      * @param nome o nome do Evento
      * @param local o local associado ao Evento
      */
-    public Evento(String nome, Local local, double precoIngresso, Organizadora organizadora, String data) {
+    public Evento(String nome, Local local, double precoIngresso, Organizadora organizadora, String data, int capacidade) {
         this.nome = nome;
         this.local = local;
+        local.setDisponivel(false);
         this.precoIngresso = precoIngresso; // modificar para representar o preço base do ingresso
         this.organizadora = organizadora;
         this.data = data;
-
+        this.capacidade = capacidade;
+        this.ingressosRestantes = capacidade;
     }
 
     /**
@@ -39,6 +44,9 @@ public abstract class Evento {
      * @param nome o novo nome do Evento
      */
     public void setNome(String nome){
+        if (nome == null || nome.isEmpty()) {
+            throw new IllegalArgumentException("Nome do evento não pode ser nulo ou vazio.");
+        }
         this.nome = nome;
     }
 
@@ -55,6 +63,9 @@ public abstract class Evento {
      * @param local o novo local do Evento
      */
     public void setLocal(Local local) {
+        if (local == null) {
+            throw new IllegalArgumentException("Local não pode ser nulo.");
+        }
         this.local = local;
     }
 
@@ -71,7 +82,18 @@ public abstract class Evento {
      * @param precoIngresso o novo precoIngresso do Evento
      */
     public void setPrecoIngresso(double precoIngresso){
+        if (precoIngresso <= 0) {
+            throw new IllegalArgumentException("Preço do ingresso deve ser maior que zero.");
+        }
         this.precoIngresso = precoIngresso;
+    }
+
+    /**
+     * Retorna a capacidade do Evento
+     * @return a capacidade do Evento
+     */
+    public int getCapacidade() {
+        return capacidade;
     }
 
     public String descricao(){
@@ -86,5 +108,26 @@ public abstract class Evento {
         return data;
     }
 
+    /**
+     * Vende um ingresso para o cliente
+     * @param cliente o cliente que está comprando o ingresso
+     * @throws IngressoEsgotadoException se não houver ingressos disponíveis
+     * @throws IllegalArgumentException se o cliente for nulo
+     */
+    public void venderIngresso(Cliente cliente) throws IngressoEsgotadoException{
+        // Tratar evento não encontrado no App
 
+        if (cliente == null) {
+            throw new IllegalArgumentException("Insira um cliente válido.");
+        }
+        if (this.ingressosRestantes == 0) {
+            throw new IngressoEsgotadoException("Ingressos esgotados.");
+        }
+
+        Ingresso ingresso = new Ingresso(this, this.precoIngresso);
+        cliente.getIngressos().add(ingresso);
+
+        this.ingressosRestantes--;
+        System.out.println("Ingresso vendido com sucesso para o cliente: " + cliente.getNome());
+    }
 }

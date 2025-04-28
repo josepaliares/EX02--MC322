@@ -17,8 +17,8 @@ public class EventoShow extends Evento {
     * @param artista o artista do Evento
     * @param organizadora a organizadora do Evento
     */
-    public EventoShow(String nome, Local local, double precoIngresso, Organizadora organizadora, String data, String artista) {
-        super(nome, local, precoIngresso, organizadora, data);
+    public EventoShow(String nome, Local local, double precoIngresso, Organizadora organizadora, String data, int capacidade, String artista) {
+        super(nome, local, precoIngresso, organizadora, data, capacidade);
         this.artista = artista;
 
     }

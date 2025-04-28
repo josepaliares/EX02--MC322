@@ -19,8 +19,8 @@ public class EventoFestival extends Evento {
     * @param dataInicio a data de início do Festival
     * @param dataFim a data de fim do Festival
     */
-    public EventoFestival(String nome, Local local, double precoIngresso, Organizadora organizadora, String data, List<String> lineup, int duracao) {
-        super(nome, local, precoIngresso, organizadora, data);
+    public EventoFestival(String nome, Local local, double precoIngresso, Organizadora organizadora, String data, int capacidade, List<String> lineup, int duracao) {
+        super(nome, local, precoIngresso, organizadora, data, capacidade);
         this.lineup = lineup;
         this.duracao = duracao;
     }
