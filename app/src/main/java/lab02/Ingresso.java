@@ -32,6 +32,18 @@ public class Ingresso {
 
         return this.preco;
     }
+
+    /**
+     * Altera o preço do Ingresso para `preco` 
+     * @param preco o novo preço do Ingresso
+     */
+    public void setPreco(double preco) {
+        if (preco <= 0) {
+            throw new IllegalArgumentException("Preço do ingresso deve ser maior que zero.");
+        }
+        this.preco = preco;
+    }
+    
     /**
      * Retorna o evento associado ao Ingresso
      * @return o evento associado ao Ingresso

@@ -1,12 +1,16 @@
 package lab02;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import lab02.filters.Filter;
 
 public class Organizadora {
 
     private String nome;
     private int cnpj;
     private String endereco;
+    private final List<Evento> eventos;
 
     /**
      * Construtor da classe Organizadora
@@ -18,6 +22,7 @@ public class Organizadora {
         this.nome = nome;
         this.cnpj = cnpj;
         this.endereco = endereco;
+        this.eventos = new ArrayList<>();
     }
 
     /**
@@ -27,6 +32,16 @@ public class Organizadora {
     public String getNome() {
         return nome;
     }
+    /**
+     * Altera o nome da organizadora para `nome` 
+     * @param nome o novo nome da organizadora
+     */
+    public void setNome(String nome) {
+        if (nome == null || nome.isEmpty()) {
+            throw new IllegalArgumentException("Nome não pode ser nulo ou vazio.");
+        }
+        this.nome = nome;
+    }
 
     /**
      * Retorna o CNPJ da organizadora
@@ -35,6 +50,16 @@ public class Organizadora {
     public int getCnpj() {
         return cnpj;
     }
+    /**
+     * Altera o CNPJ da organizadora para `cnpj` 
+     * @param cnpj o novo CNPJ da organizadora
+     */
+    public void setCnpj(int cnpj) {
+        if (cnpj < 1000000000) {
+            throw new IllegalArgumentException("CNPJ não pode ser menor que 10 dígitos.");
+        }
+        this.cnpj = cnpj;
+    }
 
     /**
      * Retorna o endereço da organizadora
@@ -42,6 +67,44 @@ public class Organizadora {
      */
     public String getEndereco() {
         return endereco;
+    }
+    /**
+     * Altera o endereço da organizadora para `endereco` 
+     * @param endereco o novo endereço da organizadora
+     */
+    public void setEndereco(String endereco) {
+        if (endereco == null || endereco.isEmpty()) {
+            throw new IllegalArgumentException("Endereço não pode ser nulo ou vazio.");
+        }
+        this.endereco = endereco;
+    }
+
+    /**
+     * Retorna a lista de eventos da organizadora
+     * @return a lista de eventos da organizadora
+     */
+    public List<Evento> getEventos() {
+        return eventos;
+    }
+    /**
+     * Adiciona um evento à lista de eventos da organizadora
+     * @param evento o evento a ser adicionado
+     */
+    public void adicionarEvento(Evento evento) {
+        if (evento == null) {
+            throw new IllegalArgumentException("Evento não pode ser nulo.");
+        }
+        this.eventos.add(evento);
+    }
+    /**
+     * Remove um evento da lista de eventos da organizadora
+     * @param evento o evento a ser removido
+     */
+    public void removerEvento(Evento evento) {
+        if (evento == null) {
+            throw new IllegalArgumentException("Evento não pode ser nulo.");
+        }
+        this.eventos.remove(evento);
     }
 
     /**
@@ -80,5 +143,20 @@ public class Organizadora {
      */
     public EventoShow criarEvento(String nome, Local local, double precoIngresso, String data, String artista, int capacidade) {
         return new EventoShow(nome, local, precoIngresso, this, data, capacidade, artista);
+    }
+
+    /**
+     * Busca eventos com base em um filtro
+     * @param filtro o filtro a ser aplicado na busca
+     * @return uma lista de eventos que atendem ao filtro
+     */
+    public List<Evento> buscarEventos(Filter<Evento> filtro) {
+        List<Evento> resultado = new ArrayList<>();
+        for (Evento evento : eventos) {
+            if (filtro.matches(evento)) {
+                resultado.add(evento);
+            }
+        }
+        return resultado;
     }
 }

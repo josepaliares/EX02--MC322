@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EventoJogo extends Evento {
         
-    private List<String> times;
+    private final List<String> times;
     /**
     * Construtor da classe EventoEsporte
     * @param nome o nome do Evento

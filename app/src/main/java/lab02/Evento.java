@@ -109,6 +109,14 @@ public abstract class Evento {
     }
 
     /**
+     * Retorna a organizadora do Evento
+     * @return a organizadora do Evento
+     */
+    public Organizadora getOrganizadora() {
+        return organizadora;
+    }
+
+    /**
      * Vende um ingresso para o cliente
      * @param cliente o cliente que está comprando o ingresso
      * @throws IngressoEsgotadoException se não houver ingressos disponíveis
@@ -129,5 +137,13 @@ public abstract class Evento {
 
         this.ingressosRestantes--;
         System.out.println("Ingresso vendido com sucesso para o cliente: " + cliente.getNome());
+    }
+
+    /**
+     * Altera a quantia de ingressos restantes
+     * @param ingressosRestantes a nova quantidade de ingressos restantes
+     */
+    public void setIngressosRestantes(int ingressosRestantes) {
+        this.ingressosRestantes = ingressosRestantes;
     }
 }

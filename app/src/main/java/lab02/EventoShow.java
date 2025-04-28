@@ -24,18 +24,28 @@ public class EventoShow extends Evento {
     }
 
     /**
+     * Retorna o artista do Evento
+     * @return o artista do Evento
+     */
+    public String getArtista() {
+        return artista;
+    }
+    /**
+     * Altera o artista do Evento para `artista` 
+     * @param artista o novo artista do Evento
+     */
+    public void setArtista(String artista) {
+        if (artista == null || artista.isEmpty()) {
+            throw new IllegalArgumentException("Artista não pode ser nulo ou vazio.");
+        }
+        this.artista = artista;
+    }
+
+    /**
     * Retorna a descrição do Evento
     * @return a descrição do Evento
     */
     public String getDescricao() {
         return "Show: " + this.nome + " - Artista: " + this.artista  + " - Local: " + this.local + " - Data: " + this.data;
-    }
-    
-    /**
-    * Retorna o preço do Ingresso do Evento
-    * @return o preço do Ingresso do Evento
-    */
-    public double getPrecoIngresso() {
-        return this.precoIngresso;
     }
 }

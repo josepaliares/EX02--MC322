@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ImobiliariaDeEventos {
     
-    private List<Local> locais;
+    private final List<Local> locais;
     private String nome;
 
 

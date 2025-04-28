@@ -9,14 +9,16 @@ package lab02;
 import java.util.ArrayList;
 import java.util.List;
 
-import lab02.exceptions.IngressoNaoEncontradoException;
 import lab02.exceptions.CancelamentoNaoPermitidoException;
+import lab02.exceptions.IngressoNaoEncontradoException;
+import lab02.notifications.Notificavel;
 
-public class Cliente {
+public class Cliente implements Comparable<Cliente>{
 
     private String nome;
     private String email;
-    private List<Ingresso> ingressos;
+    private final List<Ingresso> ingressos;
+    private final List<Notificavel> notificacoes;
 
     /**
      * Construtor da classe cliente
@@ -27,6 +29,7 @@ public class Cliente {
         this.nome = nome;
         this.email = email;
         this.ingressos = new ArrayList<>();
+        this.notificacoes = new ArrayList<>();
     }
 
     /**
@@ -109,8 +112,44 @@ public class Cliente {
                 break;
             }
         }
-
+        // Se o ingresso não foi encontrado, lança uma exceção
         throw new IngressoNaoEncontradoException("Ingresso não encontrado.");
 
+    }
+
+    /**
+     * Adiciona um canal de notificação ao cliente
+     * @param notificacao o canal de notificação a ser adicionado
+     */
+    public void adicionarNotificacao(Notificavel notificacao) {
+        this.notificacoes.add(notificacao);
+    }
+    /**
+     * Envia uma notificação para todos os canais de notificação do cliente
+     * @param mensagem a mensagem a ser enviada
+     */
+    public void enviarNotificacao(String mensagem) {
+        for (Notificavel notificacao : notificacoes) {
+            notificacao.exibirNotificacao(mensagem);
+        }
+    }
+
+    /**
+     * Compara este cliente com outro cliente
+     * @param outroCliente o outro cliente a ser comparado
+     * @return 0 se os clientes têm ingressos para o mesmo evento, -1 caso contrário
+     */
+    @Override
+    public int compareTo(Cliente outroCliente) {        
+        for (Ingresso ingresso : this.ingressos) {
+            for (Ingresso outroIngresso : outroCliente.getIngressos()) {
+                if (ingresso.getEvento().equals(outroIngresso.getEvento())) {
+                    System.out.println("Os clientes têm ingressos para o mesmo evento: " + ingresso.getEvento().getNome());
+                    return 0;  // Os clientes têm ingressos para o mesmo evento
+                }
+            }
+        }
+        System.out.println("Os clientes não têm ingressos para o mesmo evento.");
+        return -1; // Os clientes não têm ingressos para o mesmo evento
     }
 }

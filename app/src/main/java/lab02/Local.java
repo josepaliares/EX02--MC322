@@ -17,16 +17,16 @@ import lab02.exceptions.LocalIndisponivelException;
 public class Local{
     private String nome;
     private int capacidadeMaxima;
-    private boolean disponivel = true;
+    private boolean disponivel;
 
     /**
      * Construtor da classe Local
      * @param nome o nome do local
      */
-    public Local(String nome, int capacidadeMaxima, boolean disponivel){
+    public Local(String nome, int capacidadeMaxima){
         this.nome = nome;
         this.capacidadeMaxima = capacidadeMaxima;
-        this.disponivel = disponivel;
+        this.disponivel = true;
     }
 
     /**
