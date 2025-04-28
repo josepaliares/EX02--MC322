@@ -1,6 +1,6 @@
-# Event Management System - MC322 OOP Class - UNICAMP
+# Event Management System
 
-This project is designed to apply Object-Oriented Programming (OOP) concepts, focusing on classes, method overloading, exception handling, and the Filter/Criteria design pattern.
+This project is designed to apply Object-Oriented Programming (OOP) concepts, focusing on classes, method overloading, exception handling, and the Filter/Criteria design pattern. It is a project for the **MC322 - OOP** class at **UNICAMP**.
 
 ## Key Concepts
 
